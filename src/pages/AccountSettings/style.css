@@ -1,0 +1,12 @@
+.label__button-upload-img{
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.15s linear;
+} .label__button-upload-img:hover{
+  visibility: visible;
+  opacity: 1;
+}
+.img__hover-change-profile:hover ~ .label__button-upload-img{
+  visibility: visible;
+  opacity: 1;
+}
