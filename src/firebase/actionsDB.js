@@ -16,21 +16,24 @@ export const newUserDB = (uid, userName, email) => {
 }
 
 export const newReviewDB = (authorName, title, description, categories) => {
-  const prevImages = []
-  db.collection('reviews').add({
-    authorName,
-    title,
-    description,
-    categories,
-    prevImages,
-  })
-  .then((docRef) => {
-    console.log("Reseña creada con el ID: ", docRef.id);
-    return docRef.id;
-  })
-  .catch((error) => {
+  return new Promise( (resolve, reject) => {
+    const prevImages = []
+    db.collection('reviews').add({
+      authorName,
+      title,
+      description,
+      categories,
+      prevImages,
+    })
+    .then((docRef) => {
+      console.log("Reseña creada con el ID: ", docRef.id);
+      resolve(docRef.id);
+    })
+    .catch((error) => {
       console.error("Error al crear la reseña: ", error);
-  });
+      reject(error)
+    });
+  })
 }
 export const uploadImagesToReviewDB = (idReview, prevImages) => {
   db.collection('reviews').doc(`${idReview}`).update({

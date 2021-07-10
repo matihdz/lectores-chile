@@ -13,27 +13,21 @@ import { CrUploadPrevImages } from '../../helpers/CrUploadPrevImages';
 const animatedComponents = makeAnimated();
 
 export const CreateReview = () => {
-  const methods = useForm({
-    resolver: yupResolver(schemaCreateReviewForm)
-  });
+  const methods = useForm({ resolver: yupResolver(schemaCreateReviewForm) });
   const { register, handleSubmit, formState: { errors }, control } = methods;
+  const { uid, userName } = useSelector(state => state.auth);
 
-  const { uid, userName } = useSelector(state => state.auth)
-
-  const handleSubmitReview = (data) => {
+  const handleSubmitReview = async (data) => {
     const { title, description, category, prevImages } = data;
-    const IdNewReviewDB = newReviewDB(userName, title, description, category );
+    const IdNewReviewDB = await newReviewDB(userName, title, description, category );
     if(prevImages) {
-      const imagesPrevURL = CrUploadPrevImages(prevImages, IdNewReviewDB);
-      console.log(imagesPrevURL);
-/*       CrUploadPrevImages(prevImages, IdNewReviewDB)
-        .then( URLprevImages  => {
-          uploadImagesToReviewDB(IdNewReviewDB, URLprevImages);
-        })
-        .catch( e => console.log(e)) */
+      const storageArrayUrlsImages = await CrUploadPrevImages(prevImages, IdNewReviewDB);
+      uploadImagesToReviewDB(IdNewReviewDB, storageArrayUrlsImages);
     }
     addIDReviewToTheUserDB(uid, IdNewReviewDB);
   }
+
+
 
   return (
     <div>

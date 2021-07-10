@@ -1,17 +1,24 @@
 import { storage } from "../firebase/firebase-config";
 
 export const CrUploadPrevImages = (prevImages, idReview) => {
-  const file = prevImages[0];
-  console.log(file)
-  const storageRef = storage.ref(`/reviews/${idReview}/1`);
-  const task = storageRef.put(file);
-  task.on('state_changed', snapshot => {
-    /*EL ERROR ESTÁ POR ACA, TIRA UNDEFINED EL "URL"*/
-  }, error => {
-    console.log(error)
-  }, async () => {
-    const url = await task.snapshot.ref.getDownloadURL().then( url => url);
-    console.log(url)
-    return url;
+  return Promise.all(
+    prevImages.map( (imgFile, index) => getUrlofImageUploaded(imgFile, index, idReview))
+  )
+  .then( urlsOfImages => urlsOfImages)
+  .catch( err => console.log(err))
+}
+
+export const getUrlofImageUploaded = (imgFile, index, idReview) => {
+  return new Promise( (resolve, reject) => {
+    const storageRef = storage.ref(`/reviews/${idReview}/${index}`);
+    const task = storageRef.put(imgFile);
+    task.on('state_changed', snapshot => {
+    }, error => {
+      console.log(error)
+      reject(error)
+    }, async () => {
+      const url = await task.snapshot.ref.getDownloadURL().then( url => url);
+      resolve(url)
+    })
   })
 }
