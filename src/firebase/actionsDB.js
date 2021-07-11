@@ -24,6 +24,7 @@ export const newReviewDB = (authorName, title, description, categories) => {
       description,
       categories,
       prevImages,
+      date: new Date()
     })
     .then((docRef) => {
       console.log("Reseña creada con el ID: ", docRef.id);

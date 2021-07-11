@@ -15,6 +15,7 @@ import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { login } from '../actions/auth';
 import { CreateReview } from '../pages/CreateReview/CreateReview';
+import { Reviews } from '../pages/Reviews/Reviews';
 
 export const AppRouter = () => {
 
@@ -47,6 +48,8 @@ export const AppRouter = () => {
       <div>
         <Navbar/>
         <Switch>
+          <Route path="/reseñas" component={Reviews} isAuthenticated={isLoggedIn}/>
+          
           <PublicRoute path="/autenticacion" component={AuthRouter} isAuthenticated={isLoggedIn}/>
           <PrivateRoute path="/mi-cuenta" component={AccountSetting} isAuthenticated={isLoggedIn}/>
           <PrivateRoute path="/crear-reseña" component={CreateReview} isAuthenticated={isLoggedIn}/>
