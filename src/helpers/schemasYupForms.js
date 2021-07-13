@@ -14,8 +14,8 @@ export const schemaCreateReviewForm = yup.object().shape({
   category: yup
     .array()
     .min(1, "Debes seleccionar al menos una categoría")
+    .max(5, "Debes seleccionar como máximo 5 categorías")
     .required("La elección de categoria es obligatoria")
-    
 });
 
 export const schemaLoginForm = yup.object().shape({
