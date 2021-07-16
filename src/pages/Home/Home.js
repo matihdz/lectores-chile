@@ -44,24 +44,28 @@ export const Home = () => {
 
   return (
     <div className="md:p-8">
-      <div className="ml-10 flex items-center">
-        <p className="text-xs font-medium mr-1">Filtrar por:</p> 
-        <div>
-          <button onClick={handleInputActive} name={filtersName.titleR} className="w-max mx-px p-2 bg-secondary text-tertiary rounded-t-lg text-xs"><i className="fas fa-heading"></i></button>
-          <button onClick={handleInputActive} name={filtersName.titleB} className="w-max mx-px p-2 bg-secondary text-tertiary rounded-t-lg text-xs"><i className="fas fa-book"></i></button>
-          <button onClick={handleInputActive} name={filtersName.tags} className="w-max mx-px p-2 bg-secondary text-tertiary rounded-t-lg text-xs"><i className="fas fa-tags"></i></button>
-          <button onClick={handleInputActive} name={filtersName.author} className="w-max mx-px p-2 bg-secondary text-tertiary rounded-t-lg text-xs"><i className="fas fa-at"></i></button>
-          <button onClick={handleInputActive} name={filtersName.date} className="w-max mx-px p-2 bg-secondary text-tertiary rounded-t-lg text-xs"><i className="fas fa-clock"></i></button>
+      <div className="max-w-screen-md mx-auto">
+        <div className="flex items-center ">
+          <p className="text-xs font-medium mr-1">Filtrar por:</p> 
+          <div>
+            <button onClick={handleInputActive} name={filtersName.titleR} className="w-max mx-px p-2 bg-secondary text-tertiary rounded-t-lg text-xs focus:outline-none"><i className="fas fa-heading"></i></button>
+            <button onClick={handleInputActive} name={filtersName.titleB} className="w-max mx-px p-2 bg-secondary text-tertiary rounded-t-lg text-xs focus:outline-none"><i className="fas fa-book"></i></button>
+            <button onClick={handleInputActive} name={filtersName.tags} className="w-max mx-px p-2 bg-secondary text-tertiary rounded-t-lg text-xs focus:outline-none"><i className="fas fa-tags"></i></button>
+            <button onClick={handleInputActive} name={filtersName.author} className="w-max mx-px p-2 bg-secondary text-tertiary rounded-t-lg text-xs focus:outline-none"><i className="fas fa-at"></i></button>
+            <button onClick={handleInputActive} name={filtersName.date} className="w-max mx-px p-2 bg-secondary text-tertiary rounded-t-lg text-xs focus:outline-none"><i className="fas fa-clock"></i></button>
+          </div>
         </div>
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(handleSubmitSearch)} className="bg-secondary rounded-sm flex flex-col justify-between items-center shadow ">
+            <div className="p-2 w-full">
+              <FormFilterOptions filterActive={filterActive} filtersName={filtersName}/>
+            </div>
+            <button className="w-9/12 focus:outline-none px-4 py-3 hover:bg-quaternary">
+              <i className="fas fa-search text-tertiary "></i>
+            </button>
+          </form>
+        </FormProvider>
       </div>
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(handleSubmitSearch)} className="bg-secondary flex items-center rounded-full shadow p-4">
-          <FormFilterOptions filterActive={filterActive} filtersName={filtersName}/>
-          <button className="rounded-full p-2 focus:outline-none hover:bg-quinary w-12 h-12 flex items-center justify-center">
-            <i className="fas fa-search text-tertiary "></i>
-          </button>
-        </form>
-      </FormProvider>
       <div>
         {
           (loading)

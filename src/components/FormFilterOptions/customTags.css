@@ -1,10 +1,9 @@
 .labelFilterCategory{
-  background-color: red;
-
+  background-color: var(--tertiary);
 } 
 .checkboxFilterCategory{
   display: none;
 }
 .checkboxFilterCategory:checked + .labelFilterCategory{
-  background-color: green;
+  background-color: var(--quinary);
 }
