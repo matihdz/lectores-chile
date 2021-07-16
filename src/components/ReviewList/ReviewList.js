@@ -24,7 +24,7 @@ export const ReviewList = ({reviews}) => {
     <>
       {
         reviews && reviews.map( (rev, indexRev) => {
-          const { authorName, categories, date, description, prevImages, title } = rev;
+          const { authorName, categories, date, description, prevImages, title, book } = rev;
           const firstImage = prevImages[0]
           return (
             <div key={indexRev} className="md:h-64 max-w-md mx-auto my-3 sm:rounded-xl shadow-md overflow-hidden md:max-w-2xl">
@@ -33,13 +33,14 @@ export const ReviewList = ({reviews}) => {
                   <img className="h-40 w-full md:h-full md:w-48 object-top hover:object-bottom object-cover" src={firstImage} alt={title}/>
                 </div>
                 <div className="h-full p-2 flex flex-col justify-between items-center">
-                  <p className="mt-1 mb-2 text-center text-lg font-bold">{title}</p>
+                  <p className="mt-1 text-center text-lg font-bold">{title}</p>
+                  <p className="mb-2 text-center font-light italic">{book}</p>
                   <p className="text-justify text-md line-clamp-3">{description}</p>
                   <div className="mt-1 ">
                     <ReviewCategories categories={categories}/>
                   </div>
                   <div className="mt-2 flex justify-between w-full text-xs">
-                    <p>Escrito por <span className="underline font-medium">{authorName}</span></p>
+                    <p>Reseña de <span className="underline font-medium">{authorName}</span></p>
                     <p>{new Date(date * 1000).toLocaleDateString()}</p>
                   </div>
                 </div>

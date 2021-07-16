@@ -15,7 +15,7 @@ export const newUserDB = (uid, userName, email) => {
   });
 }
 
-export const newReviewDB = (authorName, title, description, categories) => {
+export const newReviewDB = (authorName, title, description, categories, book) => {
   return new Promise( (resolve, reject) => {
     const prevImages = []
     db.collection('reviews').add({
@@ -24,6 +24,7 @@ export const newReviewDB = (authorName, title, description, categories) => {
       description,
       categories,
       prevImages,
+      book,
       date: new Date()
     })
     .then((docRef) => {

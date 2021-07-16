@@ -18,8 +18,8 @@ export const CreateReview = () => {
   const { uid, userName } = useSelector(state => state.auth);
 
   const handleSubmitReview = async (data) => {
-    const { title, description, category, prevImages } = data;
-    const IdNewReviewDB = await newReviewDB(userName, title, description, category );
+    const { title, description, category, prevImages, book} = data;
+    const IdNewReviewDB = await newReviewDB(userName, title, description, category, book );
     if(prevImages) {
       const storageArrayUrlsImages = await CrUploadPrevImages(prevImages, IdNewReviewDB);
       uploadImagesToReviewDB(IdNewReviewDB, storageArrayUrlsImages);
@@ -43,6 +43,15 @@ export const CreateReview = () => {
                 className="w-10/12 rounded-md"
               />
               {errors.title && <p className="text-xs text-quinary text-center my-1">{errors.title?.message}</p>}
+
+              <label htmlFor="c-review__book"><p className="text-tertiary">Libro a reseñar</p></label>
+              <input 
+                id="c-review__book" 
+                type="text"
+                {...register("book")}
+                className="w-10/12 rounded-md"
+              />
+              {errors.book && <p className="text-xs text-quinary text-center my-1">{errors.book?.message}</p>}
 
               <label htmlFor="c-review__desc text-tertiary"><p className="text-tertiary">Descripción</p></label>
               <textarea 

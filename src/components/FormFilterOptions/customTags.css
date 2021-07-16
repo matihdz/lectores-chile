@@ -1,0 +1,10 @@
+.labelFilterCategory{
+  background-color: red;
+
+} 
+.checkboxFilterCategory{
+  display: none;
+}
+.checkboxFilterCategory:checked + .labelFilterCategory{
+  background-color: green;
+}

@@ -3,9 +3,14 @@ import * as yup from "yup";
 export const schemaCreateReviewForm = yup.object().shape({
   title: yup
     .string()
-    .min(10, "El titulo debe tener al menos 10 caracteres")
-    .max(50, "El titulo debe tener como máximo 50 caracteres")
-    .required("El titulo es obligatorio"),
+    .min(10, "El titulo de la reseña debe tener al menos 10 caracteres")
+    .max(50, "El titulo de la reseña debe tener como máximo 50 caracteres")
+    .required("El titulo de la reseña es obligatorio"),
+  book: yup
+    .string()
+    .min(3, "El titulo del libro debe tener al menos 3 caracteres")
+    .max(50, "El titulo del libro debe tener como máximo 50 caracteres")
+    .required("El titulo del libro es obligatorio"),
   description: yup
     .string()
     .min(30, "La descripción debe tener al menos 30 caracteres")

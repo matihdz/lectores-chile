@@ -29,11 +29,8 @@ export const Navbar = () => {
                 <li className="col-start-1">
                   <Link to="/"><img src={rev} alt="Icono MundoReseñas" className="w-20 sm:w-24"/></Link>
                 </li>
-                <li className="col-start-3 h-full w-full hover:text-quaternary">
-                  <Link to="/" className="block h-full m-w-content flex justify-center items-center">Inicio</Link>
-                </li>
                 <li className="col-start-4 h-full w-full hover:text-quaternary">
-                  <Link to="/reseñas" className="block h-full m-w-content flex justify-center items-center">Reseñas</Link>
+                  <Link to="/" className="block h-full m-w-content flex justify-center items-center">Inicio</Link>
                 </li>
                 <li className="col-start-6 h-full w-full hover:text-quaternary">
                   <Link to="/crear-reseña" className="block h-full m-w-content flex flex-col justify-center items-center">
@@ -62,11 +59,8 @@ export const Navbar = () => {
                 <li className="col-start-1">
                   <Link to="/"><img src={rev} alt="Icono MundoReseñas" className="w-20 sm:w-24"/></Link>
                 </li>
-                <li className="col-start-3 h-full w-full hover:text-quaternary">
-                  <Link to="/" className="block h-full m-w-content flex justify-center items-center">Inicio</Link>
-                </li>
                 <li className="col-start-4 h-full w-full hover:text-quaternary">
-                  <Link to="/reseñas" className="block h-full m-w-content flex justify-center items-center">Reseñas</Link>
+                  <Link to="/" className="block h-full m-w-content flex justify-center items-center">Inicio</Link>
                 </li>
               </ul>
             </nav>
