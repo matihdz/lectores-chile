@@ -1,95 +1,71 @@
 import React from 'react'
 import { useFormContext } from "react-hook-form";
-import { optionsCategory } from '../../helpers/optionsCategory';
+import { CheckBoxGroup } from './FilterOptions/TagsOption';
 import './customTags.css'
 
+/* 
+- Validar Campos al presionar en buscar en el formulario, con Schemas de YUP (en la parte de la pagina HOME)
+*/
+
+const styleByDefaultOfNormalInputs = 'w-full text-primary text-lg py-6 px-6 focus:outline-none rounded-sm'
+const timeBetweenDates = {
+  dateStart: 'DATE-START',
+  dateEnd: 'DATE-END'
+}
+
 export const FormFilterOptions = ({filterActive, filtersName}) => {
+  const { setValue, register } = useFormContext();
   const { titleR, titleB, tags, author, date } = filtersName;
-
-  const returnInputOfFilterActive = () => {
-    if(filterActive[titleR]) {
-      return (
-        <input 
-          className="w-full text-primary text-lg py-6 px-6 focus:outline-none" 
-          id="search" type="text" 
-          placeholder="Ej: Reseña del principito"
-          autoComplete="off"
-        />
-      )
-    } else if(filterActive[titleB]){
-      return (
-        <input 
-          className="w-full text-primary text-lg py-6 px-6 focus:outline-none" 
-          id="search" type="text" 
-          placeholder="Ej: El principito"
-          autoComplete="off"
-        />
-      )
-    } else if(filterActive[tags]){
-      return (
-        <div className="flex flex-wrap p-2">
-          {
-            optionsCategory.map( (opt, index) => {
-              const { label, value} = opt
-              return (
-                <div key={index} className="p-2">
-                  <input id={`checkboxComboCAT-${index}`} type="checkbox" className="checkboxFilterCategory"/>
-                  <label htmlFor={`checkboxComboCAT-${index}`} className="labelFilterCategory p-1 rounded-sm cursor-pointer select-none text-sm">{value}</label>
-                </div>
-              )
-            })
-          }
-        </div>
-        
-      )
-    } else if(filterActive[author]){
-      return (
-        <input 
-          className="w-full text-primary text-lg py-6 px-6 focus:outline-none" 
-          id="search" type="text" 
-          placeholder="Ej: Matias Iturrieta"
-          autoComplete="off"
-        />
-      )
-    } else if(filterActive[date]){
-      return (
-        <div className="text-center text-tertiary flex flex-col justify-center align-center max-w-md mx-auto">
-          <label>Desde
-            <input 
-              className="w-full text-primary text-lg py-6 px-6 focus:outline-none" 
-              id="search" type="date" 
-              placeholder="Ej: El principito"
-              autoComplete="off"
-            />
-          </label>
-          <label>Hasta
-            <input 
-              className="w-full text-primary text-lg py-6 px-6 focus:outline-none" 
-              id="search" type="date" 
-              placeholder="Ej: El principito"
-              autoComplete="off"
-            />
-          </label>
-        </div>
-      )
-    }
-  }
   
-
   return (
     <div className="w-full">
-      {
-        filterActive && returnInputOfFilterActive()
-      }
+      {/* TITLE REVIEW */}
+      <input 
+        {...register(titleR)}
+        className={`${filterActive[titleR] ? 'block' : 'hidden'} ${styleByDefaultOfNormalInputs}`}
+        type="text" 
+        placeholder="Ej: Reseña del principito"
+        autoComplete="off"
+      />
+      {/* TITLE BOOK */}
+      <input 
+        {...register(titleB)}
+        className={`${filterActive[titleB] ? 'block' : 'hidden'} ${styleByDefaultOfNormalInputs}`}
+        type="text" 
+        placeholder="Ej: El principito"
+        autoComplete="off"
+      />
+      {/* AUTHOR */}
+      <input 
+        {...register(author)}
+        className={`${filterActive[author] ? 'block' : 'hidden'} ${styleByDefaultOfNormalInputs}`} 
+        type="text" 
+        placeholder="Ej: Matias Iturrieta"
+        autoComplete="off"
+      />
+      {/* DATE */}
+      <div className={`${filterActive[date] ? 'block' : 'hidden'} text-center text-tertiary flex flex-col justify-center align-center max-w-md mx-auto`}>
+        <label>Desde
+          <input 
+            {...register(timeBetweenDates.dateStart)}
+            className={`${styleByDefaultOfNormalInputs}`}
+            id="search" type="date" 
+            placeholder="Ej: El principito"
+            autoComplete="off"
+          />
+        </label>
+        <label>Hasta
+          <input 
+            {...register(timeBetweenDates.dateEnd)}
+            className={`${styleByDefaultOfNormalInputs}`}
+            id="search" type="date" 
+            placeholder="Ej: El principito"
+            autoComplete="off"
+          />
+        </label>
+      </div>
+      {/* TAGS */}
+      <CheckBoxGroup isThisFilterActive={filterActive[tags]} filterName={tags} setValue={setValue}/>
     </div>
   )
 }
-
-/* 
-<input 
-  className="bg-indigo-50 rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none mr-1" 
-  id="search" type="text" 
-  placeholder="Ej: Reseña del principito"
-  autoComplete="off"
-/>
-*/

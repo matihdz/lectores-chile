@@ -4,9 +4,6 @@ import { db } from '../../firebase/firebase-config';
 import { useForm, FormProvider } from "react-hook-form";
 import { FormFilterOptions } from '../../components/FormFilterOptions/FormFilterOptions';
 
-/* 
-  - Terminar el buscador con los filtros incluidos (podria separar los botones en un componente aparte, ...)
-*/
 const filtersName = {
   titleR: "TITLE-R",
   titleB: "TITLE-B",
